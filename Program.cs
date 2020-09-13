@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Transactions;
+using System.Data.Common;
+using System.Data.SqlClient;
 
 namespace Hw_11
 {
@@ -8,7 +10,32 @@ namespace Hw_11
     {
         static void Main(string[] args)
         {
-            DataSet dataSet = new DataSet("Online shop");
+            private static readonly SqlConnection connection = new SqlConnection() { ConnectionString = "Server = DESKTOP - EHO5LMS\\SQLEXPRESS; Database = KazShop; Trusted_Connection=True;" };
+        ConnectionString = ddd;
+
+            DbProviderFactories.RegisterFactory("provider", SqlClientFactory.Instance);
+            var providerFactory = DbProviderFactories.GetFactory("provider");
+
+
+            var dataSet = new DataSet("Online shop");
+            var dataAdapter = providerFactory.CreateDataAdapter();
+
+            var selectCommand = providerFactory.CreateCommand();
+            var connection = providerFactory.CreateConnection();
+
+            connection.ConnectionString = "Server = (localdb)\\MSSQLLocaldb; Database = autolevelDb;Trusted_Connection = True;";
+            selectCommand.CommandText = "select + from Users";
+            selectCommand.Connection = connection;
+
+            dataAdapter.SelectCommand = selectCommand;
+
+            var CommandBuilder = providerFactory.CreateCommandBuilder();
+            CommandBuilder.DataAdapter = dataAdapter;
+            dataAdapter.InsertCommand = CommandBuilder.GetDeleteCommand();
+            dataAdapter.UpdateCommand = CommandBuilder.GetDeleteCommand();
+            dataAdapter.DeleteCommand = CommandBuilder.GetDeleteCommand();
+
+            dataAdapter.Fill(dataSet);
 
             DataTable usersTable = new DataTable("Users");
             DataColumn idColumn = new DataColumn();
@@ -106,15 +133,8 @@ namespace Hw_11
                 new string[] { "UserId" },
                 false);
             dataSet.Relations.Add(relation);
-
-            DataRelation relation = new DataRelation(
-                "users_profile_relation",
-                "Users",
-                "Profiles",
-                new string[] { "Id" },
-                new string[] { "UserId" },
-                false);
-            dataSet.Relations.Add(relation);
+    
+           
         }
     }
 }

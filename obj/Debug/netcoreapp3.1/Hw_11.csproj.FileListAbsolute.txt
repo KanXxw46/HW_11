@@ -1,0 +1,4 @@
+C:\Users\Андрей\source\repos\Hw_11\Hw_11\bin\Debug\netcoreapp3.1\Hw_11.exe
+C:\Users\Андрей\source\repos\Hw_11\Hw_11\obj\Debug\netcoreapp3.1\Hw_11.csprojAssemblyReference.cache
+C:\Users\Андрей\source\repos\Hw_11\Hw_11\obj\Debug\netcoreapp3.1\Hw_11.AssemblyInfoInputs.cache
+C:\Users\Андрей\source\repos\Hw_11\Hw_11\obj\Debug\netcoreapp3.1\Hw_11.AssemblyInfo.cs
